@@ -1,0 +1,367 @@
+html {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #0f0f0f;
+    color: #ddd;
+    animation: fade_in 750ms;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 15px 15px 30px 15px;
+}
+
+.laura {
+	color: #d60270 !important; /* I have no idea why this important is needed, I broke something */
+}
+.laura:hover {
+	color: #f63090 !important;
+}
+.maja {
+	color: #4cd771 !important;
+}
+.maja:hover {
+	color: #78ff79 !important;
+}
+.lily {
+	color: #e8a54e !important;
+}
+.lily:hover {
+	color: #f8c56e !important;
+}
+.kamila {
+	color: #ee72f1 !important;
+}
+.kamila:hover {
+	color: #fe82fa !important;
+}
+.tillie {
+	color: rgb(236, 169, 203) !important; /* I am not converting this */
+}
+.tillie:hover {
+	color: rgb(248, 190, 213) !important;	
+}
+.kacpi {
+	color: #7DC6FF !important;
+}
+.kacpi:hover {
+	color: #8DD6FF !important;
+}
+.cadence {
+	color: #ffc004 !important;
+}
+.cadence:hover {
+	color: #ffe033 !important;
+}
+.riley {
+	color: #b2b2ff !important;
+}
+.riley:hover {
+	color: #d2d2ff !important;
+}
+.lili {
+	color: #ffde00 !important;
+}
+.lili:hover {
+	color: #fffe60 !important;
+}
+.luna {
+	color: #BB33FF !important;
+}
+.luna:hover {
+	color: #D040D0 !important;
+}
+.juh {
+	color: #00cccc !important;
+}
+.juh:hover {
+	color: cyan !important;	
+}
+.mika {
+	color: #0f0 !important;
+}
+.mika:hover {
+	color: #8f8 !important;
+}
+.linus {
+	color: #0073d5 !important;
+}
+.linus:hover {
+	color: #008aff !important;
+}
+.adryd {
+	color: #70bcda !important;
+}
+.adryd:hover {
+	color: #72dcfa !important;
+}
+.ar {
+	color: #bc00f6 !important;
+}
+.ar:hover {
+	color: #dc20ff !important;
+}
+.drozdziak1 {
+	color: #bf496e !important;
+}
+.drozdziak1:hover {
+	color: #df698e !important;
+}
+.bluraf {
+	color: #26689c !important;
+}
+.bluraf:hover {
+	color: #6795b9 !important;
+}
+.tadeustad {
+	color: #00ffac !important;
+}
+.tadeustad:hover {
+	color: #b0ffde !important;
+}
+.riedler {
+	color: #257c77 !important;
+}
+.riedler:hover {
+	color: #358c87 !important;
+}
+.irth {
+	color: #bd67d3 !important;
+}
+.irth:hover {
+	color: #dd87f3 !important;
+}
+.miya {
+	color: #d96f96 !important;
+}
+.miya:hover {
+	color: #ee77ae !important;
+}
+.mei {
+	color: #9cdaf5 !important;
+}
+.mei:hover {
+	color: #afeaff !important;
+}
+
+#badge > img, #badge > a > img {
+	image-rendering: pixelated;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: initial;
+}
+
+h1 {
+    font-size: 64px;
+    padding: 0;
+    margin: 25px 0 0 0;
+}
+
+h2 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 32px;
+    margin: 15px 0 5px 0;
+}
+
+h4,h5 {
+    font-size: 16px;
+}
+
+#header_right {
+    align-items: center;
+    text-shadow: 5px 5px #555;
+    padding: 20px;
+    text-align: center;
+}
+
+#header_left {
+    float:left;
+    text-align:center;
+}
+#header_left > a > img {
+    width: 180px;
+    box-shadow: 6px 6px #000;
+    text-align: center;
+    background-color: #00002F;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header {
+    clear: both;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menuitem {
+    position: relative;
+    display: inline;
+    text-shadow: 4px 4px #444;
+    margin: 0 16px 0 16px;
+    text-align: center;
+}
+
+.menuitem:hover {
+    text-shadow: 2px 2px #444;
+    top: 2px;
+    left: 2px;
+}
+
+#badge {
+    float: right;
+    margin: 2px 0 0 10px;
+}
+
+#style_picker {
+	position: absolute;
+	width: 200px;
+	top: 8px;
+	right: 8px;
+	text-align: right;
+}
+
+#style_picker > h3 {
+	margin: 0 0 5px 0;
+	text-align: right !important; /* sigh */
+}
+
+a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    color: #1c1;
+}
+a:hover, a:active {
+    color: #1f1;
+}
+
+hr {
+    background-color: #2f2f2f;
+    height: 1px;
+    border: 0;
+    margin-top: 8px;
+    margin-bottom: 10px; /* oddly specific, i know */
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+ol > li {
+    list-style-type: decimal-leading-zero;
+}
+
+ul > li {
+    list-style-type: square;
+}
+
+ul {
+    padding-left: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ol {
+    margin-top: 0;
+    margin-bottom:0;
+}
+
+li > a > img {
+    margin: 5px 10px 0 0;
+}
+
+p {
+    margin-top: 5px;
+}
+
+code {
+    display: block;
+    background-color: #282828;
+    color: #ccc;
+    width: 100%;
+    padding: 8px 0px 10px 15px;
+    margin: 10px 0;
+    white-space: pre;
+    box-shadow: 6px 6px #000;
+    overflow-x: auto;
+}
+
+.postlist > img, .ko-fi, .header_left > img, .ico, .crispy, #rss {
+	image-rendering: crisp-edges;
+}
+
+.pride-gradient {
+	/*background-size: 200% 200%;*/
+	background-position: 0% 100%;
+	background-image: linear-gradient(to left, #e40303 16.66%, #ff8c00 16.66% 33.33%, #ffed00 33.33% 50%, #008026 50% 66.66%, #004dff 66.66% 83.33%, #750787 83.33% 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: rgba(0,0,0,0);
+}
+
+.enby-gradient {
+	background-image: linear-gradient(to left, #fdf12d 25%, #fdfdfd 25% 45%, #9b57cf 50% 75%, #444 75% 100%) !important;
+}
+
+.trans-gradient {
+	background-image: linear-gradient(to left, #32bcf6 20%, #f7b0c4 20% 40%, #fff 40% 60%, #f7b0c4 60% 80%, #32bcf6 80% 100%) !important;
+}
+
+.poly-gradient {
+	background-image: linear-gradient(to left, #20c6fe 33%, #f82076 33% 66%, #552f7d 66% 100%) !important;
+}
+
+@media (min-width: 769px) {
+    #content, #header {
+    	width: 769px;
+        max-width: 768px;
+    }
+}
+
+@media (max-width: 768px) {
+    #header_left {
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+    #header_right, #header_right > ul {
+        float: none;
+        margin: 20px 0;
+        padding: 0;
+    }
+    .menuitem {
+        margin: 0 4px 0 4px;
+        padding: 0;
+    }
+    #content {
+        margin: 0;
+        padding: 0;
+    }
+    #footer, #badge {
+        text-align: center;
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@keyframes fade_in {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
