@@ -12,6 +12,56 @@
     <link rel="shortcut icon" type="image/png" href="favicons/img-favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/font_mono.css" id="font_stylesheet">
+    <style>
+        body {
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        #header_left img {
+            max-width: 150px;
+            border-radius: 10px;
+        }
+        .menuitem {
+            display: inline;
+            margin-right: 1rem;
+        }
+        hr {
+            border: 1px solid #333;
+            margin: 2rem 0;
+        }
+        a {
+            color: #8ab4f8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        #footer {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-link {
+            font-weight: bold;
+        }
+        .highlight {
+            background: #1f1f1f;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body bgcolor="#0f0f0f" text="#dddddd">
     <div id="header">
@@ -22,75 +72,68 @@
         </div>
         <div id="header_right">
             <h1>ryan's website</h1>
-            <br>
             <ul>
                 <li class="menuitem"><a href="/">home</a></li>
                 <li class="menuitem"><a href="https://github.com/luryann">github</a></li>
                 <li class="menuitem"><a href="https://www.linkedin.com/in/luryann/">linkedin</a></li>
                 <li class="menuitem"><a href="mailto:luryan17082@gmail.com">email me!</a></li>
-
-
             </ul>
         </div>
     </div>
     <div id="content">
         <h3>about me</h3>
         <ul>
-            <li>pronouns: he/him&nbsp;</li>
-            <li>i'm 16</li>
-            <li>junior at alhambra high school, california</li>
-            <li>microelectronics enjoyer</li>
-            <li>i swim (CIF finalist)</li>
-            <li>i enjoy spedning time in nature</li>
-            <li>run linux servers as a side hobby</li>
-            <li>i have strong leadership skills; i routinely maintain large projects (created by me), or lead activites for school and whatnot.</li>
+            <li>pronouns: he/him</li>
+            <li>i'm 16 and a junior at alhambra high school, california</li>
+            <li>tech enthusiast focusing on firmware engineering & web development</li>
+            <li>varsity swimmer (2024 CIF Division 4 Finalist)</li>
+            <li>lead web developer at DARE Aquatics</li>
+            <li>passionate about microelectronics and system-level programming</li>
+            <li>manage linux servers and self-hosted services as a hobby</li>
+            <li>project leader who enjoys maintaining large-scale technical initiatives</li>
         </ul>
-        <br>
+
         <p>
-            My interests lie in <b>maintaining something</b>, <b>networks</b>, <b>various types of electronics</b>, and <b>software development</b>.
+            My interests span across <span class="highlight">firmware engineering</span>, <span class="highlight">web development</span>, <span class="highlight">server administration</span>, and <span class="highlight">open-source development</span>. I especially enjoy projects that challenge me to learn new technologies and solve complex problems.
         </p>
+
         <p>
-            I'm particularly interested in self-hosting! The concept of maintaining servers and server hardware has always fascinated me. The idea of leaving a computer running hundreds of miles away and talking to it through a really, really long wire is really cool. Currently, my setup hosts a diverse array of services for friends and myself, such as WireShark instances, Minecraft servers, NextCloud instances, and various other miscellaneous things. And it's all done on a 2 core Celeron/4gb RAM Chromebox i got for 20 bucks. 
+            I'm particularly passionate about self-hosting! Currently, I maintain a server setup that runs on a modest 2-core Celeron Chromebox with 4GB RAM (acquired for just $20!). This setup hosts various services including WireShark instances, Minecraft servers, and NextCloud deployments. It's a testament to how much can be achieved with limited resources when properly optimized.
         </p>
+
         <p>
-            Apart from my tech pursuits, I find joy in nature, outdoor activities, and watching sunsets. When I was younger, I used to think gaming all day was cool. As I grew older, I realized enjoying time outside is pretty cool as well. Looking ahead, I would also like to venture into the field of aviation; I've always been interested in aviation and I think it'd be awesome if I learnt how to fly someday.
+            Beyond technology, I find balance in nature and outdoor activities. I've grown to appreciate the importance of disconnecting from screens and enjoying the natural world. Looking ahead, I'm also interested in exploring aviation - the idea of learning to fly has always captivated me.
         </p>
-        <br>
+
         <hr>
-        <h3>projects</h3>
-        <p>
-            A random selection of stuff I made:
-        </p>
+        <h3>featured projects</h3>
         <ol>
-            <li><a href="https://github.com/dareaquatics/dare-website">dareaquatics/dare-website</a>, a fully fledged website with automation features for my swim team</li>
-            <li><a href="https://github.com/dareaquatics/docs">dareaquatics/docs</a>, work in progress documentation i'm writing to help people who are willing to contribute to the website </li>
-            <li><a href="https://github.com/dareaquatics/sdk">dareaquatics/sdk</a>, python tools I wrote to help others develop the aforementioned website</li>
-            <li><a href="https://github.com/luryann/humanizer">humanizer</a>, a python script that simulates human typing with machine learning and other algorithms</li>
-			<li><a href ="https://github.com/luryann/luryann.github.io">ryan's webpage</a>, the github repo for this website!</li>
+            <li><a href="https://github.com/dareaquatics/dare-website" class="project-link">DARE Aquatics Website</a> - Full-featured platform with CI/CD automation for my swim team</li>
+            <li><a href="https://github.com/luryann/hdasD3Patch" class="project-link">Intel HDA Power Management</a> - Custom ACPI SSDT implementation for audio controller power state management</li>
+            <li><a href="https://github.com/luryann/CCCV" class="project-link">noJSClipboardBlock</a> - Chrome extension using debugger API for granular script control</li>
+            <li><a href="https://github.com/luryann/humanizer" class="project-link">Humanizer</a> - Python script simulating human-like typing patterns</li>
+            <li><a href="https://github.com/luryann/luryann.github.io" class="project-link">Personal Website</a> - This website's source code!</li>
         </ol>
-        <br>
+
         <hr>
         <h3>contact / socials</h3>
         <ul>
-            <li>e-mail (<a href="mailto:luryan17082@gmail.com">luryan17082@gmail.com</a>)</li>
-            <li>GitHub (<a href="https://github.com/luryann">@luryann</a>)</li>
-            <li>Linkedin (<a href="https://www.linkedin.com/in/luuryan">in/luuryan</a>)</li>
+            <li>Email: <a href="mailto:luryan17082@gmail.com">luryan17082@gmail.com</a></li>
+            <li>GitHub: <a href="https://github.com/luryann">@luryann</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/luryann">in/luryann</a></li>
         </ul>
-        <hr>
-        <h3>other fun facts</h3>
-        <ul>
-            <li>i've enjoyed messing with chromebooks since I was around 10. i made this webpage on a chromebook running Arch Linux (btw)</li>
-            <li>i've never been in a costco before</li>
-            <li>i love listening to music</li>
-            <li>i've been a batch script kiddie since 9</li>
-            <li>been interested in python since I was in third grade (so I was like 10 maybe)</li>
-            <li>i'm into fashion/streetwear</li>
-            <li>i strive to be very organized.</li>
-            <li>i like to take initiative on things, especially when nobody else is willing to do it.</li>
-            <li>i learn things pretty quickly, it took me around a hour to learn enough CI/CD to write a github actions workflow for my swim team's website</li>
 
-        </ul>
         <hr>
+        <h3>quick facts</h3>
+        <ul>
+            <li>Started coding with batch scripts at age 9, moved to Python by age 10</li>
+            <li>Been modifying Chromebooks since age 10 (this page was made on an Arch Linux Chromebook!)</li>
+            <li>Quick learner - taught myself CI/CD for implementing GitHub Actions in about an hour</li>
+            <li>Passionate about organization and taking initiative on projects</li>
+            <li>Interests outside tech include fashion/streetwear and music</li>
+            <li>Fun fact: I've never been to Costco!</li>
+        </ul>
+
         <div id="footer">
             <span>&copy; ryan lu 2024, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a></span>
             <div id="badge">
