@@ -1,26 +1,19 @@
+---
+permalink: /llms.txt
+---
 # Ryan Lu
 
 > Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, swim timing systems, research sales.
 
-Contact: ryanlu@ucsb.edu
+Contact: {{ site.email }}
 GitHub: https://github.com/luryann
 
 ## Pages
-- [Index](https://luryann.github.io/): who I am, one paragraph.
-- [about](https://luryann.github.io/about.html): Languages and interests outside work.
-- [experience](https://luryann.github.io/experience.html): Roles, dates, and education.
-- [links](https://luryann.github.io/links.html): Email and GitHub.
-- [photos](https://luryann.github.io/photos.html): iPhone photos.
-- [privacy](https://luryann.github.io/privacy.html): No analytics, no cookies, one localStorage theme key.
-- [projects](https://luryann.github.io/projects.html): dare-website, wilson, and other repositories.
-- [Writing](https://luryann.github.io/writing.html): posts.
-  - [what a touchpad actually measures](https://luryann.github.io/writing/touchpad.html) 2026-08-10
-  - [the meet that ran on a backup button](https://luryann.github.io/writing/console.html) 2026-07-28
-  - [the two hours before the lifeguards show up](https://luryann.github.io/writing/beach.html) 2026-07-02
-  - [an album is a different object when you are high](https://luryann.github.io/writing/high.html) 2026-06-15
-  - [downshifting is a timing problem](https://luryann.github.io/writing/downshift.html) 2026-05-08
-  - [1,267 commits on a swim team website](https://luryann.github.io/writing/commits.html) 2026-04-20
-  - [one tank of gas, back by Sunday night](https://luryann.github.io/writing/travel.html) 2026-03-11
-
+- [Index]({{ site.url }}/): who I am, one paragraph.
+{% assign listed_pages = site.html_pages | where_exp: "p", "p.url != '/' and p.url != '/404.html' and p.url != '/writing.html'" %}
+{% for p in listed_pages %}- [{{ p.title }}]({{ site.url }}{{ p.url }}): {{ p.description }}
+{% endfor %}- [Writing]({{ site.url }}/writing.html): posts.
+{% for post in site.posts %}  - [{{ post.title }}]({{ site.url }}{{ post.url }}) {{ post.date | date: "%Y-%m-%d" }}
+{% endfor %}
 ## Notes for crawlers
 Every page is a separate static HTML document with all of its text in the initial response. No JavaScript is required to read anything.

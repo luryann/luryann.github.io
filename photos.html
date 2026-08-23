@@ -1,92 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>photos</title>
-<meta name="description" content="iPhone photos.">
-<link rel="canonical" href="https://luryann.github.io/photos.html">
-<meta name="color-scheme" content="light dark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="photos - Ryan Lu">
-<meta property="og:description" content="iPhone photos.">
-<link rel="stylesheet" href="assets/site.css">
-<style>
-  .photo-grid img {
-    image-rendering: auto;
-    color-interpolation: sRGB;
-  }
-</style>
-<script>
-  // Applied before first paint so the page never flashes the wrong theme.
-  try {
-    var t = localStorage.getItem("rl-theme");
-    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
-  } catch (e) {}
-</script>
-
-</head>
-<body>
-<div class="wrap">
-
-  <header class="site-head">
-    <div>
-      <div class="title-row">
-        <h1><a href="index.html" style="text-decoration:none">ryan lu</a><span class="caret" aria-hidden="true"></span></h1>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme">[dark]</button>
-      </div>
-      <div class="rule" aria-hidden="true">========================================================================</div>
-    </div>
-    <nav aria-label="Sections">
-      <a href="index.html">[index]</a>
-      <a href="projects.html">[projects]</a>
-      <a href="experience.html">[experience]</a>
-      <a href="writing.html">[writing]</a>
-      <a href="photos.html" aria-current="page">[photos]</a>
-      <a href="about.html">[about]</a>
-      <a href="links.html">[links]</a>
-    </nav>
-  </header>
-
-  <main>
-    <div class="heading">
-      <h2>photos</h2>
-      <div aria-hidden="true">------</div>
-    </div>
+---
+layout: default
+navKey: photos
+title: photos
+description: "iPhone photos."
+---
 <p class="dim">shot on iphone 16 plus</p>
+{% assign photo_files = site.static_files | where_exp: "f", "f.path contains '/assets/photos/'" | sort: "name" %}
 <ul class="photo-grid">
+{% if photo_files.size > 0 %}
+{% for f in photo_files %}
   <li>
-    <div class="photo"><img src="assets/img/IMG_3013.jpg" alt="" loading="lazy"></div>
-  </li>
-  <li>
-    <div class="photo"><img src="assets/img/IMG_5911.jpg" alt="" loading="lazy"></div>
-  </li>
-  <li>
-    <div class="photo"><img src="assets/img/IMG_8080.jpg" alt="" loading="lazy"></div>
-  </li>
-  <li>
-    <div class="photo"><img src="assets/img/IMG_8686.jpg" alt="" loading="lazy"></div>
-  </li>
-  <li>
-    <div class="photo"><img src="assets/img/IMG_9124.jpg" alt="" loading="lazy"></div>
-  </li>
-  <li>
-    <div class="photo"><img src="assets/img/IMG_9184.jpg" alt="" loading="lazy"></div>
-  </li>
-</ul>
-
-  </main>
-
-  <footer>
-    <div class="rule rule--foot" aria-hidden="true">------------------------------------------------------------------------</div>
-    <div class="meta">
-      <span>Los Angeles, <span data-la-time>--:--</span></span>
-      <span>Updated 2026-08-22</span>
-      <a href="privacy.html">privacy</a>
+    <div class="photo">
+      <img src="{{ f.path }}" alt="" loading="lazy" decoding="async">
     </div>
-  </footer>
-
-</div>
-<script src="assets/site.js" defer></script>
-</body>
-</html>
+  </li>
+{% endfor %}
+{% else %}
+{% for i in (1..8) %}
+  <li>
+    <div class="photo"></div>
+  </li>
+{% endfor %}
+{% endif %}
+</ul>

@@ -1,0 +1,9 @@
+---
+layout: post
+navKey: writing
+title: "1,267 commits on a swim team website"
+description: "Two boring changes that mattered more than any feature."
+---
+<p>The DARE Aquatics site started as a favor and turned into the longest running thing I have built. Most of those commits are not features. They are me learning that a website people depend on is a maintenance commitment, not a launch.</p>
+<p>The two changes that mattered most were boring. First, pulling the header, footer, and head into shared partials, so a nav change stopped meaning eleven identical edits. Second, moving news and calendar updates into scheduled GitHub Actions that write into marked regions of the HTML, so coaches stopped needing me to publish an announcement.</p>
+<p>It is a static site on GitHub Pages with no framework, and that was the right call. Nobody inherits a build toolchain they cannot run. If I disappear tomorrow, the next person opens an HTML file and reads it.</p>

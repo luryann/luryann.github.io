@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }} - {{ site.author }}{% endif %}</title>
+<meta name="description" content="{{ page.description }}">
+{% if page.noindex %}<meta name="robots" content="noindex">{% else %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="{% if page.url contains '/writing/' %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }} - {{ site.author }}{% endif %}">
+<meta property="og:description" content="{{ page.description }}">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+  // Applied before first paint so the page never flashes the wrong theme.
+  try {
+    var t = localStorage.getItem("rl-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+{% if page.jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Person","@id":"#ryanlu","name":"Ryan Lu","givenName":"Ryan","familyName":"Lu","jobTitle":"Computer Engineering student","description":"Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, timing systems, research sales.","address":{"@type":"PostalAddress","addressLocality":"Los Angeles","addressRegion":"CA","addressCountry":"US"},
+"email":"mailto:ryanlu@ucsb.edu","knowsLanguage":[{"@type":"Language","name":"English"},{"@type":"Language","name":"Chinese"}],
+"alumniOf":{"@type":"CollegeOrUniversity","name":"University of California, Santa Barbara"},
+"sameAs":["https://github.com/luryann"],
+"worksFor":[{"@type":"Organization","name":"Lumos Scientific"},{"@type":"Organization","name":"Southern California Swimming"}]},
+{"@type":"WebSite","name":"Ryan Lu","url":"{{ site.url }}/","inLanguage":"en","about":{"@id":"#ryanlu"},"author":{"@id":"#ryanlu"}}]}
+</script>
+{% endif %}
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-head">
+    <div>
+      <div class="title-row">
+        <h1><a href="/" style="text-decoration:none">ryan lu</a><span class="caret" aria-hidden="true"></span></h1>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme">[dark]</button>
+      </div>
+      <div class="rule" aria-hidden="true">========================================================================</div>
+    </div>
+    {% include nav.html %}
+  </header>
+
+  <main>
+{% if page.title %}
+    <div class="heading">
+      <h2>{{ page.title }}</h2>
+      <div aria-hidden="true">{% assign len = page.title | size %}{% for i in (1..len) %}-{% endfor %}</div>
+    </div>
+{% endif %}
+{{ content }}
+  </main>
+
+  {% include footer.html %}
+
+</div>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+title: "Ryan Lu"
+author: "Ryan Lu"
+email: "ryanlu@ucsb.edu"
+description: >-
+  Computer engineering student at UC Santa Barbara, based in Los Angeles,
+  California. Web development, swim timing systems, research sales.
+url: "https://luryann.github.io"
+baseurl: ""
+
+markdown: kramdown
+
+# Posts live at /writing/<slug>.html instead of Jekyll's date-prefixed
+# default. Scoped to the posts collection only — a top-level `permalink:`
+# key affects plain pages too and strips their .html extension.
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      permalink: /writing/:slug.html
+
+# jekyll-sitemap is on GitHub Pages' plugin allowlist, so this runs on a plain
+# "Deploy from a branch" build with no workflow file.
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+
+# Shared nav, in display order. Consumed by _includes/nav.html.
+nav:
+  - key: ""
+    label: index
+    url: /
+  - key: projects
+    label: projects
+    url: /projects.html
+  - key: experience
+    label: experience
+    url: /experience.html
+  - key: writing
+    label: writing
+    url: /writing.html
+  - key: photos
+    label: photos
+    url: /photos.html
+  - key: about
+    label: about
+    url: /about.html
+  - key: links
+    label: links
+    url: /links.html
