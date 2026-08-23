@@ -10,7 +10,9 @@ GitHub: https://github.com/luryann
 
 ## Pages
 - [Index]({{ site.url }}/): who I am, one paragraph.
-{% assign listed_pages = site.html_pages | where_exp: "p", "p.url != '/' and p.url != '/404.html' and p.url != '/writing.html'" %}
+{% assign listed_pages = site.html_pages | where_exp: "p", "p.url != '/'" -%}
+{% assign listed_pages = listed_pages | where_exp: "p", "p.url != '/404.html'" -%}
+{% assign listed_pages = listed_pages | where_exp: "p", "p.url != '/writing.html'" -%}
 {% for p in listed_pages %}- [{{ p.title }}]({{ site.url }}{{ p.url }}): {{ p.description }}
 {% endfor %}- [Writing]({{ site.url }}/writing.html): posts.
 {% for post in site.posts %}  - [{{ post.title }}]({{ site.url }}{{ post.url }}) {{ post.date | date: "%Y-%m-%d" }}
