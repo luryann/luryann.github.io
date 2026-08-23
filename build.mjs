@@ -1,38 +1,40 @@
 #!/usr/bin/env node
 // Static site build. No dependencies, no config. Requires Node 18+.
 //
-//   node build.mjs          -> writes dist/
+//   node build.mjs
 //
-// How it works:
-//   src/layout.html         the one shell every page uses ({{token}} holes)
-//   src/pages/*.html        one file per page, first line is a <!--meta {...} --> comment
-//   src/writing/*.html      one file per post, named YYYY-MM-DD-slug.html
-//   src/assets/*            copied verbatim to dist/assets/
+// Writes finished HTML into the repository root, so GitHub Pages can serve this
+// branch directly (Settings -> Pages -> Deploy from a branch, / root).
 //
-// Generated for you: the writing index, sitemap.xml, llms.txt, robots.txt,
-// 404.html, .nojekyll, and the "Updated" date in the footer.
+//   src/layout.html      the one shell every page uses ({{token}} holes)
+//   src/pages/*.html     one file per page, first line is a <!--meta {...} --> comment
+//   src/writing/*.html   one file per post, named YYYY-MM-DD-slug.html
+//   src/assets/*         copied to assets/
 //
-// To add a post: drop a file in src/writing/. Nothing else to touch.
-// To add a page: drop a file in src/pages/ and add it to NAV below if it
-// should appear in the nav.
+// Generated: the writing index, sitemap.xml, llms.txt, robots.txt, 404.html,
+// .nojekyll, and the footer's "Updated" date.
+//
+// Links are relative so the site works at a domain root, in a subdirectory, and
+// straight off the filesystem. 404.html is the one exception: Pages serves it
+// for a miss at any depth, so it gets absolute paths.
 
-import { readFile, writeFile, mkdir, readdir, rm, cp } from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { readFile, writeFile, mkdir, readdir, cp } from "node:fs/promises";
+import { dirname, join } from "node:path";
 
 const SITE = process.env.SITE_URL || "https://luryann.github.io";
 const AUTHOR = "Ryan Lu";
 const SRC = "src";
-const OUT = "dist";
+const OUT = ".";
 
-// nav order; key "" is the index. Keys must match a page's navKey.
+// nav order: [navKey, label, file]
 const NAV = [
-  ["", "index"],
-  ["projects", "projects"],
-  ["experience", "experience"],
-  ["writing", "writing"],
-  ["photos", "photos"],
-  ["about", "about"],
-  ["links", "links"],
+  ["", "index", "index.html"],
+  ["projects", "projects", "projects.html"],
+  ["experience", "experience", "experience.html"],
+  ["writing", "writing", "writing.html"],
+  ["photos", "photos", "photos.html"],
+  ["about", "about", "about.html"],
+  ["links", "links", "links.html"],
 ];
 
 const JSONLD = `<script type="application/ld+json">
@@ -48,8 +50,10 @@ const JSONLD = `<script type="application/ld+json">
 const UPDATED = (process.env.LAST_UPDATED || new Date().toISOString().slice(0, 10)).slice(0, 10);
 
 const dashes = (s) => "-".repeat(s.length);
-const rootFor = (path) => path === "" ? "./" : "../".repeat(path.replace(/\/$/, "").split("/").length);
 const fill = (tpl, vals) => tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => (k in vals ? vals[k] : m));
+// depth prefix: "" for root-level files, "../" for writing/*.html
+const prefixFor = (path) => "../".repeat(path.split("/").length - 1);
+const url = (path) => "/" + (path === "index.html" ? "" : path);
 
 function parse(source) {
   const m = source.match(/^<!--meta\s([\s\S]*?)-->\s*/);
@@ -59,23 +63,36 @@ function parse(source) {
 
 const layout = await readFile(join(SRC, "layout.html"), "utf8");
 
-function nav(activeKey, root) {
-  return NAV.map(([key, label]) => {
-    const href = root + (key ? key + "/" : "");
-    const current = key === activeKey ? ' aria-current="page"' : "";
-    return `      <a href="${href}"${current}>[${label}]</a>`;
-  }).join("\n");
-}
+// Photo slots are emitted only for files that exist, so an empty folder renders
+// placeholders instead of logging image 404s.
+const PHOTO_SLOTS = 8;
+let photoFiles = [];
+try {
+  photoFiles = (await readdir(join(SRC, "assets", "photos")))
+    .filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f)).sort();
+} catch {}
 
-function render({ path, navKey, pageTitle, title, description, jsonld, content, rootOverride, noindex }) {
-  const root = rootOverride || rootFor(path);
+const photoSlots = (root) =>
+  (photoFiles.length ? photoFiles : new Array(PHOTO_SLOTS).fill(null))
+    .map((f) => {
+      const img = f ? `\n      <img src="${root}assets/photos/${f}" alt="" loading="lazy" decoding="async">\n    ` : "";
+      return `  <li>\n    <div class="photo">${img}</div>\n  </li>`;
+    }).join("\n");
+
+const nav = (activeKey, root) =>
+  NAV.map(([key, label, file]) =>
+    `      <a href="${root}${file}"${key === activeKey ? ' aria-current="page"' : ""}>[${label}]</a>`
+  ).join("\n");
+
+function render({ path, navKey, pageTitle, title, description, jsonld, content, noindex, rootOverride }) {
+  const root = rootOverride ?? prefixFor(path);
   const heading = title
     ? `    <div class="heading">\n      <h2>${title}</h2>\n      <div aria-hidden="true">${dashes(title)}</div>\n    </div>\n`
     : "";
   return fill(layout, {
     title: pageTitle || `${title} - ${AUTHOR}`,
     description,
-    canonical: `${SITE}/${path}`,
+    canonical: noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}${url(path)}">`,
     ogtype: path.startsWith("writing/") ? "article" : "website",
     root,
     nav: nav(navKey ?? null, root),
@@ -83,40 +100,14 @@ function render({ path, navKey, pageTitle, title, description, jsonld, content, 
     content: fill(content, { root, updated: UPDATED, photos: photoSlots(root) }),
     updated: UPDATED,
     jsonld: jsonld ? JSONLD : "",
-  }).replace(
-    /<link rel="canonical"[^>]*>/,
-    noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}/${path}">`
-  );
-}
-
-// Photo slots are emitted only for files that actually exist, so a fresh clone
-// renders empty placeholders instead of logging image 404s.
-const PHOTO_SLOTS = 8;
-let photoFiles = [];
-try {
-  photoFiles = (await readdir(join(SRC, "assets", "photos")))
-    .filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
-    .sort();
-} catch {}
-
-function photoSlots(root) {
-  const slots = photoFiles.length ? photoFiles : new Array(PHOTO_SLOTS).fill(null);
-  return slots.map((f) => {
-    const img = f
-      ? `\n      <img src="${root}assets/photos/${f}" alt="" loading="lazy" decoding="async">\n    `
-      : "";
-    return `  <li>\n    <div class="photo">${img}</div>\n  </li>`;
-  }).join("\n");
+  });
 }
 
 async function emit(path, html) {
-  const file = join(OUT, path, "index.html");
+  const file = join(OUT, path);
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, html);
 }
-
-await rm(OUT, { recursive: true, force: true });
-await mkdir(OUT, { recursive: true });
 
 // --- posts (newest first) ---
 const postFiles = (await readdir(join(SRC, "writing"))).filter((f) => f.endsWith(".html")).sort().reverse();
@@ -127,40 +118,36 @@ for (const f of postFiles) {
 }
 
 for (const p of posts) {
-  const path = `writing/${p.slug}/`;
-  const root = rootFor(path);
+  const path = `writing/${p.slug}.html`;
+  const root = prefixFor(path);
   const content =
-    `    <article>\n      <div class="dim">${p.date}</div>\n      <div class="prose">\n${p.body.trim().split("\n").map((l) => "        " + l).join("\n")}\n      </div>\n      <div><a href="${root}writing/">[back to writing]</a></div>\n    </article>\n`;
+    `    <article>\n      <div class="dim">${p.date}</div>\n      <div class="prose">\n` +
+    p.body.trim().split("\n").map((l) => "        " + l).join("\n") +
+    `\n      </div>\n      <div><a href="${root}writing.html">[back to writing]</a></div>\n    </article>\n`;
   await emit(path, render({ path, navKey: "writing", title: p.title, description: p.description, content }));
 }
 
 // --- writing index, generated from the posts above ---
-const writingIndex =
-  `    <ul class="list list--tight">\n` +
-  posts.map((p) => `      <li class="row"><span class="dim">${p.date}</span><a href="../writing/${p.slug}/">${p.title}</a></li>`).join("\n") +
-  `\n    </ul>\n`;
-await emit("writing/", render({
-  path: "writing/", navKey: "writing", title: "writing",
+await emit("writing.html", render({
+  path: "writing.html", navKey: "writing", title: "writing",
   description: "Posts on swim timing systems, cars, music, and building things that last.",
-  content: writingIndex,
+  content: `    <ul class="list list--tight">\n` +
+    posts.map((p) => `      <li class="row"><span class="dim">${p.date}</span><a href="writing/${p.slug}.html">${p.title}</a></li>`).join("\n") +
+    `\n    </ul>\n`,
 }));
 
 // --- pages ---
-const pageFiles = (await readdir(join(SRC, "pages"))).filter((f) => f.endsWith(".html"));
 const pages = [];
-for (const f of pageFiles) {
+for (const f of (await readdir(join(SRC, "pages"))).filter((f) => f.endsWith(".html"))) {
   const { meta, body } = parse(await readFile(join(SRC, "pages", f), "utf8"));
   pages.push({ ...meta, content: body });
   await emit(meta.path, render({ ...meta, content: body }));
 }
 
-// --- 404 ---
-// Pages serves this file for a miss at any depth while the URL stays put, so it
-// is the one page that must use root-absolute paths.
-await writeFile(join(OUT, "404.html"), render({
-  path: "", rootOverride: "/", noindex: true,
-  navKey: null, pageTitle: "Not found - " + AUTHOR, title: "404",
-  description: "Page not found.",
+// --- 404: served for a miss at any depth, so absolute paths ---
+await emit("404.html", render({
+  path: "404.html", rootOverride: "/", navKey: null, noindex: true,
+  pageTitle: "Not found - " + AUTHOR, title: "404", description: "Page not found.",
   content: `    <div class="prose">\n      <p>That page does not exist.</p>\n      <p><a href="/">[back to index]</a></p>\n    </div>\n`,
 }));
 
@@ -168,23 +155,22 @@ await writeFile(join(OUT, "404.html"), render({
 await cp(join(SRC, "assets"), join(OUT, "assets"), { recursive: true });
 
 // --- sitemap / robots / llms / nojekyll ---
-const urls = ["", ...pages.map((p) => p.path).filter((p) => p !== ""), "writing/", ...posts.map((p) => `writing/${p.slug}/`)];
+const paths = [...pages.map((p) => p.path), "writing.html", ...posts.map((p) => `writing/${p.slug}.html`)];
 await writeFile(join(OUT, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  [...new Set(urls)].map((u) => `  <url><loc>${SITE}/${u}</loc><lastmod>${UPDATED}</lastmod></url>`).join("\n") +
+  [...new Set(paths)].map((p) => `  <url><loc>${SITE}${url(p)}</loc><lastmod>${UPDATED}</lastmod></url>`).join("\n") +
   `\n</urlset>\n`);
 
-await writeFile(join(OUT, "robots.txt"),
-  `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+await writeFile(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
 await writeFile(join(OUT, "llms.txt"),
   `# Ryan Lu\n\n> Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, swim timing systems, research sales.\n\nContact: ryanlu@ucsb.edu\nGitHub: https://github.com/luryann\n\n## Pages\n` +
   `- [Index](${SITE}/): who I am, one paragraph.\n` +
-  pages.filter((p) => p.path).map((p) => `- [${p.title}](${SITE}/${p.path}): ${p.description}\n`).join("") +
-  `- [Writing](${SITE}/writing/): posts.\n` +
-  posts.map((p) => `  - [${p.title}](${SITE}/writing/${p.slug}/) ${p.date}\n`).join("") +
+  pages.filter((p) => p.path !== "index.html").map((p) => `- [${p.title}](${SITE}${url(p.path)}): ${p.description}\n`).join("") +
+  `- [Writing](${SITE}/writing.html): posts.\n` +
+  posts.map((p) => `  - [${p.title}](${SITE}/writing/${p.slug}.html) ${p.date}\n`).join("") +
   `\n## Notes for crawlers\nEvery page is a separate static HTML document with all of its text in the initial response. No JavaScript is required to read anything.\n`);
 
 await writeFile(join(OUT, ".nojekyll"), "");
 
-console.log(`built ${pages.length + posts.length + 2} pages -> ${OUT}/`);
+console.log(`built ${pages.length + posts.length + 2} pages`);
