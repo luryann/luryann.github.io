@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>projects - Ryan Lu</title>
+<meta name="description" content="dare-website, wilson, and other repositories.">
+<link rel="canonical" href="https://luryann.github.io/projects/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="projects - Ryan Lu">
+<meta property="og:description" content="dare-website, wilson, and other repositories.">
+<meta property="og:url" content="https://luryann.github.io/projects/">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // Applied before first paint so the page never flashes the wrong theme.
+  try {
+    var t = localStorage.getItem("rl-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-head">
+    <div>
+      <div class="title-row">
+        <h1><a href="../" style="text-decoration:none">ryan lu</a><span class="caret" aria-hidden="true"></span></h1>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme">[dark]</button>
+      </div>
+      <div class="rule" aria-hidden="true">========================================================================</div>
+    </div>
+    <nav aria-label="Sections">
+      <a href="../">[index]</a>
+      <a href="../projects/" aria-current="page">[projects]</a>
+      <a href="../experience/">[experience]</a>
+      <a href="../writing/">[writing]</a>
+      <a href="../photos/">[photos]</a>
+      <a href="../about/">[about]</a>
+      <a href="../links/">[links]</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="heading">
+      <h2>projects</h2>
+      <div aria-hidden="true">--------</div>
+    </div>
+<ul class="list">
+  <li>
+    <div><strong>dare-website</strong> - the official website for DARE Aquatics, a competitive
+    swim team. Static site on GitHub Pages, shared-partial layout, and GitHub
+    Actions workflows that sync the news and calendar pages on a schedule.
+    1,267 commits, GPLv3.</div>
+    <div class="dim">2023 to present &middot; <a href="https://github.com/dareaquatics/dare-website">github.com/dareaquatics/dare-website</a> &middot; <a href="http://dareaquatics.com/">dareaquatics.com</a></div>
+  </li>
+  <li>
+    <div><strong>wilson</strong> - a Wordle solver, written twice: once in C and once in
+    JavaScript. Named after Mr. Wilson, the Wordle goat. GPLv3.</div>
+    <div class="dim"><a href="https://luryann.github.io/wilson/">luryann.github.io/wilson</a> &middot; <a href="https://github.com/luryann/wilson">github.com/luryann/wilson</a></div>
+  </li>
+  <li>
+    <div class="dim">More repositories: <a href="https://github.com/luryann">github.com/luryann</a></div>
+  </li>
+</ul>
+
+  </main>
+
+  <footer>
+    <div class="rule rule--foot" aria-hidden="true">------------------------------------------------------------------------</div>
+    <div class="meta">
+      <span>Los Angeles, <span data-la-time>--:--</span></span>
+      <span>Updated 2026-08-22</span>
+      <a href="../privacy/">privacy</a>
+    </div>
+  </footer>
+
+</div>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
