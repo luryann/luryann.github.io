@@ -4,9 +4,6 @@
   --dim: #6b6b66;
   --rule: #c9c9c2;
 }
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #0f0f0e; --fg: #e8e8e3; --dim: #84847d; --rule: #33332f; }
-}
 html[data-theme="light"] { --bg: #fdfdfc; --fg: #111110; --dim: #6b6b66; --rule: #c9c9c2; }
 html[data-theme="dark"]  { --bg: #0f0f0e; --fg: #e8e8e3; --dim: #84847d; --rule: #33332f; }
 

@@ -3,13 +3,10 @@
   var KEY = "rl-theme";
   var root = document.documentElement;
 
-  function osDark() {
-    return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }
   function stored() {
     try { var v = localStorage.getItem(KEY); return v === "light" || v === "dark" ? v : null; } catch (e) { return null; }
   }
-  function current() { return stored() || (osDark() ? "dark" : "light"); }
+  function current() { return stored() || "light"; }
 
   var btn = document.querySelector("[data-theme-toggle]");
   function label() { if (btn) btn.textContent = "[" + (current() === "dark" ? "light" : "dark") + "]"; }
@@ -27,11 +24,11 @@
   var clock = document.querySelector("[data-la-time]");
   if (clock) {
     var fmt = new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", hour12: false
+      timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
     });
     var tick = function () { clock.textContent = fmt.format(new Date()); };
     tick();
-    setInterval(tick, 30000);
+    setInterval(tick, 1000);
   }
 
   // Academic year, derived from the UCSB start date so the intro never goes stale
