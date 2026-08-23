@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }} - {{ site.author }}{% endif %}</title>
+<title>{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }}{% endif %}</title>
 <meta name="description" content="{{ page.description }}">
 {% if page.noindex %}<meta name="robots" content="noindex">{% else %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="{% if page.url contains '/writing/' %}article{% else %}website{% endif %}">
-<meta property="og:title" content="{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }} - {{ site.author }}{% endif %}">
+<meta property="og:title" content="{% if page.pageTitle %}{{ page.pageTitle }}{% else %}{{ page.title }}{% endif %}">
 <meta property="og:description" content="{{ page.description }}">
 <link rel="stylesheet" href="/assets/site.css">
 <script>
