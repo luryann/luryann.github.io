@@ -1,0 +1,10 @@
+.DS_Store
+
+# Jekyll build output/cache — GitHub Pages builds this itself, never commit it.
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler
+vendor/
+.bundle/

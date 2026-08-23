@@ -1,56 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>index</title>
-<meta name="description" content="Computer engineering student at UC Santa Barbara, based in Los Angeles. Web development, swim timing systems, research sales.">
-<link rel="canonical" href="https://luryann.github.io/">
-<meta name="color-scheme" content="light dark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ryan Lu">
-<meta property="og:description" content="Computer engineering student at UC Santa Barbara, based in Los Angeles. Web development, swim timing systems, research sales.">
-<link rel="stylesheet" href="assets/site.css">
-<script>
-  // Applied before first paint so the page never flashes the wrong theme.
-  try {
-    var t = localStorage.getItem("rl-theme");
-    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
-  } catch (e) {}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"Person","@id":"#ryanlu","name":"Ryan Lu","givenName":"Ryan","familyName":"Lu","jobTitle":"Computer Engineering student","description":"Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, timing systems, research sales.","address":{"@type":"PostalAddress","addressLocality":"Los Angeles","addressRegion":"CA","addressCountry":"US"},
-"email":"mailto:ryanlu@ucsb.edu","knowsLanguage":[{"@type":"Language","name":"English"},{"@type":"Language","name":"Chinese"}],
-"alumniOf":{"@type":"CollegeOrUniversity","name":"University of California, Santa Barbara"},
-"sameAs":["https://github.com/luryann"],
-"worksFor":[{"@type":"Organization","name":"Lumos Scientific"},{"@type":"Organization","name":"Southern California Swimming"}]},
-{"@type":"WebSite","name":"Ryan Lu","url":"https://luryann.github.io/","inLanguage":"en","about":{"@id":"#ryanlu"},"author":{"@id":"#ryanlu"}}]}
-</script>
-</head>
-<body>
-<div class="wrap">
-
-  <header class="site-head">
-    <div>
-      <div class="title-row">
-        <h1><a href="index.html" style="text-decoration:none">ryan lu</a><span class="caret" aria-hidden="true"></span></h1>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme">[dark]</button>
-      </div>
-      <div class="rule" aria-hidden="true">========================================================================</div>
-    </div>
-    <nav aria-label="Sections">
-      <a href="index.html" aria-current="page">[index]</a>
-      <a href="projects.html">[projects]</a>
-      <a href="experience.html">[experience]</a>
-      <a href="writing.html">[writing]</a>
-      <a href="photos.html">[photos]</a>
-      <a href="about.html">[about]</a>
-      <a href="links.html">[links]</a>
-    </nav>
-  </header>
-
-  <main>
+---
+layout: default
+navKey: ""
+pageTitle: "Ryan Lu"
+description: "Computer engineering student at UC Santa Barbara, based in Los Angeles. Web development, swim timing systems, research sales."
+jsonld: true
+---
 <section class="prose" aria-label="Intro">
   <p><span data-academic-year>Incoming first year</span> computer engineering student at UC Santa Barbara, from Los Angeles, California. Graduating 2030.</p>
   <p>I build and maintain websites, mostly plain JavaScript. Outside of that I
@@ -60,19 +14,3 @@
   <a href="https://github.com/luryann">github.com/luryann</a>.</p>
   <p>Email is the fastest way to reach me: <a href="mailto:ryanlu@ucsb.edu">ryanlu@ucsb.edu</a>. I do my best to respond quickly.</p>
 </section>
-
-  </main>
-
-  <footer>
-    <div class="rule rule--foot" aria-hidden="true">------------------------------------------------------------------------</div>
-    <div class="meta">
-      <span>Los Angeles, <span data-la-time>--:--</span></span>
-      <span>Updated 2026-08-22</span>
-      <a href="privacy.html">privacy</a>
-    </div>
-  </footer>
-
-</div>
-<script src="assets/site.js" defer></script>
-</body>
-</html>
