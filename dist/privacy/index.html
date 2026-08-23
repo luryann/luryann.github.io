@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>privacy - Ryan Lu</title>
+<meta name="description" content="No analytics, no cookies, one localStorage theme key.">
+<link rel="canonical" href="https://luryann.github.io/privacy/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="privacy - Ryan Lu">
+<meta property="og:description" content="No analytics, no cookies, one localStorage theme key.">
+<meta property="og:url" content="https://luryann.github.io/privacy/">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // Applied before first paint so the page never flashes the wrong theme.
+  try {
+    var t = localStorage.getItem("rl-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-head">
+    <div>
+      <div class="title-row">
+        <h1><a href="../" style="text-decoration:none">ryan lu</a><span class="caret" aria-hidden="true"></span></h1>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme">[dark]</button>
+      </div>
+      <div class="rule" aria-hidden="true">========================================================================</div>
+    </div>
+    <nav aria-label="Sections">
+      <a href="../">[index]</a>
+      <a href="../projects/">[projects]</a>
+      <a href="../experience/">[experience]</a>
+      <a href="../writing/">[writing]</a>
+      <a href="../photos/">[photos]</a>
+      <a href="../about/">[about]</a>
+      <a href="../links/">[links]</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="heading">
+      <h2>privacy</h2>
+      <div aria-hidden="true">-------</div>
+    </div>
+<div class="prose">
+  <p>This site collects nothing. There is no analytics script, no advertising
+  network, no embedded tracker, no newsletter signup, and no contact form.
+  No cookies are set.</p>
+  <p>One thing is stored locally in your browser: your light or dark preference,
+  under the key <strong>rl-theme</strong>. It never leaves your device and I cannot read it.
+  Clearing site data removes it.</p>
+  <p>The host that serves these files keeps standard server logs, which include
+  IP addresses and user agents. I do not review them and I do not connect
+  them to anyone. Links out to GitHub and other sites are governed by
+  those sites' own policies.</p>
+  <p>If you email me at <a href="mailto:ryanlu@ucsb.edu">ryanlu@ucsb.edu</a>, I keep the email. That is the only
+  personal data I hold, and I will delete it on request.</p>
+  <p class="dim">Last updated 2026-08-22.</p>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="rule rule--foot" aria-hidden="true">------------------------------------------------------------------------</div>
+    <div class="meta">
+      <span>Los Angeles, <span data-la-time>--:--</span></span>
+      <span>Updated 2026-08-22</span>
+      <a href="../privacy/">privacy</a>
+    </div>
+  </footer>
+
+</div>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
