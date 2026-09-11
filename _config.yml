@@ -41,9 +41,6 @@ nav:
   - key: experience
     label: experience
     url: /experience.html
-  - key: resume
-    label: resume
-    url: /resume.html
   - key: writing
     label: writing
     url: /writing.html
