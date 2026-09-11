@@ -3,7 +3,7 @@ permalink: /llms.txt
 ---
 # Ryan Lu
 
-> Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, swim timing systems, research sales.
+> Computer engineering student at UC Santa Barbara, based in Los Angeles, California. Web development, swim timing systems, automation.
 
 Contact: {{ site.email }}
 GitHub: https://github.com/luryann
