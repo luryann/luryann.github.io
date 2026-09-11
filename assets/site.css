@@ -80,6 +80,15 @@ ul.list > li { display: flex; flex-direction: column; gap: 4px; }
 }
 .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* resume */
+.resume-embed {
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  border: 1px solid var(--rule);
+}
+.resume-embed object { width: 100%; height: 100%; }
+.resume-embed p { padding: 16px; }
+
 /* footer */
 footer { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
 .meta { color: var(--dim); display: flex; flex-wrap: wrap; gap: 0 18px; }
